@@ -1,0 +1,67 @@
+﻿@model IEnumerable<AssignmentSoftSolution.Models.Customer>
+
+@{
+    ViewBag.Title = "CustomerList";
+    int counter = 0;
+}
+
+<h2>Customer List</h2>
+
+<p>
+    @Html.ActionLink("Create Customer New", "Save", "Customer")
+</p>
+
+@if (Model.Count() > 0)
+{<table class="table">
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                @Html.DisplayName("Customer Name")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+
+                <td>
+                    @(++counter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerName)
+                </td>
+                @if (item.Gender == false)
+                {
+                    <td>
+                        Female
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Male
+                    </td>
+                }
+                <td>
+                    @Html.ActionLink("Update", "Save", new { Id = item.CustomerId }) |
+                    @Html.ActionLink("Delete", "Delete", new { Id = item.CustomerId }, new { onclick = "return confirm('Are sure wants to delete?');" })
+                </td>
+            </tr>
+        }
+
+    </table>}
+else
+{
+    <div class="jumbotron">
+        <h2>Sorry No Data To Show</h2>
+       
+    </div>
+}
+
